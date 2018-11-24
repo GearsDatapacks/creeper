@@ -2,7 +2,7 @@
 <html>
   <head>
     <meta charset="utf-8">
-    <title>new game</title>
+    <title>creeper</title>
     <link rel="shortcut icon" type="image/vnd.microsoft.icon" href="icon.png">
     <link rel="stylesheet"href="style.css">
    </head>
@@ -39,23 +39,25 @@
       stroke="black"
       stroke-width="1"
       d="M200,100 q-5,-30 25,-35 q22.5,-25 45,0  q30,5 25,35 z"/>
-      <g id="character" opacity="0">
-        <circle
-        id="head" 
-        r="20"
-        cx="20"
-        cy="155"
-        fill="tan"
-        stroke="black"
-        stroke-width="3"
-        />
-        <path 
-        id="body"
-        fill="none"
-        stroke="black"
-        stroke-width="3"
-        d="M0,250 l20,-25 l20,25 l-20,-25 l0,-50 m-20,25 l20,-25 l20,25 l-20,-25 m10,-15 q-7.5,10 -15 0 m0,-15 l0,3 m15,0 l0,3"
-        />
+      <g id="charout">
+        <g id="character" opacity="0" facing="right">
+          <circle
+          id="head" 
+          r="20"
+          cx="20"
+          cy="155"
+          fill="tan"
+          stroke="black"
+          stroke-width="3"
+          />
+          <path 
+          id="body"
+          fill="none"
+          stroke="black"
+          stroke-width="3"
+          d="M0,250 l20,-25 l20,25 l-20,-25 l0,-50 m-20,25 l20,-25 l20,25 l-20,-25 m10,-15 q-7.5,10 -15 0 m0,-15 l0,3 m15,0 l0,-3"
+          />
+        </g>
       </g>
       <path
       transform="scale(0.5)"

@@ -30,6 +30,15 @@ g#dagger[up] {
   transform: translate(33px,165px) scale(0.1);
 }
 
+path#character[crouching] > g#dagger {
+  transform: translate(0,20px) scale(0.1)
+}
+
+/*
+g#dagger[updown] {
+  transform: translate(were it ispx,groundpx) scale(0.1);
+}*/
+
 @keyframes blow {
   100% {
     transform: translate(500px,0);
