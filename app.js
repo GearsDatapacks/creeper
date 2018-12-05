@@ -55,7 +55,6 @@ function ready () {
 }
 
 function flip (element) {
-  setOrigin
   
   if (facing === 'left') {
     element.setAttribute('transform', 'scale(1,1)');
@@ -71,56 +70,18 @@ function flip (element) {
 function moveGuy (dx, dy) {
   x += dx;
   y += dy;
+  if (facing === 'right' && dx < 0) {
+    flip(character);
+  }
+  
+  if (facing === 'left' && dx > 0) {
+    flip(character);
+  }
   characterMove.setAttribute('transform', `translate(${x},${y})`);
   //console.log(x)
 }
 
-function makeObjectInvisible (object) {
-  object.setAttribute('opacity', '0');
-}
-
-function makeObjectVisible (object) {
-  object.setAttribute('opacity', '1');
-}
-
-moveGuy(0,0);
-makeObjectVisible(character);
-
-function placeHearts (callback) {
-  heart1.setAttribute("d",`M${window.innerWidth + 80},20 ${callback}`);
-  heart2.setAttribute("d",`M${window.innerWidth},20 ${callback}`);
-  heart3.setAttribute("d",`M${window.innerWidth - 80},20 ${callback}`);
-} 
-
-function placeGround () {
-  soil.setAttribute('width', window.innerWidth);
-  soil.setAttribute('height', window.innerHeight);
-  grass.setAttribute('x2', window.innerWidth);
-}
-
-placeGround();
-
-//l-15,-35 q7.5,-17.5 15,2.5 q7.5,-17.5 15,0 z
-placeHearts(`a 20,20 0,0,1 40,0
-      a 20,20 0,0,1 40,0
-      q 0,30 -40,60
-      q -40,-30 -40,-60 z`);
-
-function stand () {
-  body.setAttribute('d', 'M0,250 l20,-25 l20,25 l-20,-25 l0,-50 m-20,25 l20,-25 l20,25 l-20,-25 m10,-15 q-7.5,10 -15 0 m0,-15 l0,3 m15,0 l0,3');
-  head.setAttribute('cy', '155');
-  crouching = false;
-  character.removeAttribute('crouching');
-}
-
-function crouch () {
-  body.setAttribute('d', 'M0,250 l20,-15 l20,15 l-20,-15 l0,-30 m-20,25 l20,-25 l20,25 l-20,-25 m10,-15 q-7.5,10 -15 0 m0,-15 l0,3 m15,0 l0,3');
-  head.setAttribute('cy', '185');
-  crouching = true;
-  character.setAttribute('crouching', '');
-}
-
-window.addEventListener('keydown', function (event) {
+function keyDown (event) {
   if (event.keyCode === 39 && x >= window.innerWidth - characterWidth) {
     return;
   }
@@ -155,44 +116,93 @@ window.addEventListener('keydown', function (event) {
   
   else if (event.keyCode === 37 && crouching === true) {
     moveGuy(-5,0);
-    if (facing === 'right') {
-      flip(character);
-    }
   }
   
   else if (event.keyCode === 39 && crouching === true) {
     moveGuy(5,0);
-    if (facing === 'left') {
-      flip(character);
-    }
   }
 
   else if (event.keyCode === 39) {
     moveGuy(10,0);
-    if (facing === 'left') {
-      flip(character);
-    }
   }
   else if (event.keyCode === 40) {
     crouch();
   }
   else if (event.keyCode === 37) {
     moveGuy(-10,0);
-    if (facing === 'right') {
-      flip(character);
-    }
   }
+  
+  else if (event.keyCode === 13) {
+    attack();
+  }
+  
   else {
     return;
   }
-  
-});
+}
 
-window.addEventListener('keyup', function (event) {
-  if (event.keyCode === 40) {
-    stand()
+function keyUp (event) {
+  if (event.keyCode === 40 || event.keyCode === 13) {
+    stand();
+   // console.log('sucess', character.getAttribute('d'))
   }
-});
+}
+
+function makeObjectInvisible (object) {
+  object.setAttribute('opacity', '0');
+}
+
+function makeObjectVisible (object) {
+  object.setAttribute('opacity', '1');
+}
+
+function attack () {
+  character.setAttribute('attacking', '');
+  body.setAttribute('d', 'M0,250 l20,-25 l20,25 l-20,-25 l0,-50 m-20,25 l20,-25 l30,0 l-30,0 m10,-15 q-7.5,10 -15 0 m0,-15 h3 m15,0 h-3');
+  //console.log('sucess', character.getAttribute('d'))
+}
+
+moveGuy(0,0);
+makeObjectVisible(character);
+
+function placeHearts (callback) {
+  heart1.setAttribute("d",`M${window.innerWidth + 80},20 ${callback}`);
+  heart2.setAttribute("d",`M${window.innerWidth},20 ${callback}`);
+  heart3.setAttribute("d",`M${window.innerWidth - 80},20 ${callback}`);
+} 
+
+function placeGround () {
+  soil.setAttribute('width', window.innerWidth);
+  soil.setAttribute('height', window.innerHeight);
+  grass.setAttribute('x2', window.innerWidth);
+}
+
+placeGround();
+
+//l-15,-35 q7.5,-17.5 15,2.5 q7.5,-17.5 15,0 z
+placeHearts(`a 20,20 0,0,1 40,0
+      a 20,20 0,0,1 40,0
+      q 0,30 -40,60
+      q -40,-30 -40,-60 z`);
+
+function stand () {
+  body.setAttribute('d', 'M0,250 l20,-25 l20,25 l-20,-25 l0,-50 m-20,25 l20,-25 l20,25 l-20,-25 m10,-15 q-7.5,10 -15 0 m0,-15 h3 m15,0 h-3');
+  head.setAttribute('cy', '155');
+  crouching = false;
+  character.removeAttribute('crouching');
+  character.removeAttribute('attacking');
+}
+
+function crouch () {
+  body.setAttribute('d', 'M0,250 l20,-15 l20,15 l-20,-15 l0,-30 m-20,25 l20,-25 l20,25 l-20,-25 m10,-15 q-7.5,10 -15 0 m0,-15 h3 m15,0 h-3');
+  head.setAttribute('cy', '185');
+  crouching = true;
+  character.setAttribute('crouching', '');
+}
+
+window.addEventListener('keydown', keyDown);
+
+window.addEventListener('keyup', keyUp);
 
 //space 32
 //down arrow 40

@@ -30,8 +30,12 @@ g#dagger[up] {
   transform: translate(33px,165px) scale(0.1);
 }
 
-path#character[crouching] > g#dagger {
-  transform: translate(0,20px) scale(0.1)
+g#character[crouching] > g#dagger {
+  transform: translate(33px,190px) scale(0.1)
+}
+
+g#character[attacking] > g#dagger {
+  transform: translate(35px,145px) scale(0.1)
 }
 
 /*

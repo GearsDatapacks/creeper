@@ -1,0 +1,136 @@
+<!doctype html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>creeper</title>
+    <link rel="shortcut icon" type="image/png" href="icon.png">
+    <link rel="stylesheet"href="style.css">
+   </head>
+
+  <body>
+     <svg>
+      <line
+      id="grass"
+      stroke="green"
+      stroke-width="10"
+      x1="0"
+      y1="255"
+      y2="255"
+      />
+      <rect
+      id="soil"
+      fill="#896108"
+      x="0"
+      y="260"
+      />
+      <path 
+      id="cloud"
+      fill="white"
+      stroke="black"
+      stroke-width="1"
+      d="M200,100 q-5,-30 25,-35 q22.5,-25 45,0  q30,5 25,35 z"/>
+      <g id="charout">
+        <g id="character" opacity="0" facing="right">
+          <circle
+          id="head" 
+          r="20"
+          cx="20"
+          cy="155"
+          fill="tan"
+          stroke="black"
+          stroke-width="3"
+          />
+          <path 
+          id="body"
+          fill="none"
+          stroke="black"
+          stroke-width="3"
+          d="M0,250 l20,-25 l20,25 l-20,-25 l0,-50 m-20,25 l20,-25 l20,25 l-20,-25 m9,-15 q-7.5,10 -15 0 m0,-15 h3 m15,0 h-3"
+          />
+        </g>
+      </g>
+      <path
+      transform="scale(0.5)"
+      class="health"
+      id="health1"
+      fill="red"/>
+      <path
+      transform="scale(0.5)"
+      class="health"
+      id="health2"
+      fill="red"/>
+      <path
+      transform="scale(0.5)"
+      class="health"
+      id="health3"
+      fill="red"/>
+      <g id="dagger" down>
+	      <polygon style="fill:#666666;" points="166.112,272.432 191.782,246.762 165.807,220.787 140.137,246.457 109.578,215.897 
+		      86.353,239.122 173.446,326.215 196.671,302.991 	"/>
+	      <path style="fill:#D17519;" d="M109.719,262.488l-7.5,7.5l-59.87,59.86c-0.95,0.95-1.87,1.93-2.75,2.93
+		      c-3.96,4.47-7.19,9.36-9.69,14.51
+		      c-4.31,8.88-6.46,18.55-6.46,28.2c0,16.52,6.3,33.05,18.9,45.65
+		      c6.06,6.05,13.18,10.78,20.95,13.99c0.117,0.048,0.233,0.096,0.35,0.144
+		      c8.046,3.274,15.865-4.877,12.624-12.937
+		      c-4.007-9.963-4.871-20.895-2.594-31.277
+		      c1.16-5.3,3.14-10.45,5.94-15.27c2.26-3.88,5.05-7.54,8.38-10.87l17.14-17.14l12.08-12.08
+		      l32.86-32.85l-32.86-32.86L109.719,262.488z"/>
+	      <path style="fill:#F9E17A;" d="M109.714,262.483l-7.5,7.5v62.79h-62.62c-3.96,4.47-7.19,9.36-9.69,14.51l43.77,43.77
+		      c1.16-5.3,3.14-10.45,5.94-15.27l-28.01-28.01h53.53l12.08-12.08v-65.71L109.714,262.483z"/>
+	      <g id="XMLID_12_">
+		      <g>
+			      <path style="fill:#666666;" d="M412.314,0.25l-239.88,239.89l-43.55-43.55C261.474,64,412.314,0.25,412.314,0.25z"/>
+			      <path style="fill:#999999;" d="M172.434,240.14L412.314,0.25c0,0-63.74,150.84-196.34,283.43L172.434,240.14z"/>
+		      </g>
+		      <g>
+		      </g>
+	      </g>
+      </g>
+      <g>
+      </g>
+      <g>
+      </g>
+      <g>
+      </g>
+      <g>
+      </g>
+      <g>
+      </g>
+      <g>
+      </g>
+      <g>
+      </g>
+      <g>
+      </g>
+      <g>
+      </g>
+      <g>
+      </g>
+      <g>
+      </g>
+      <g>
+      </g>
+      <g>
+      </g>
+      <g>
+      </g>
+      <g>
+      </g>
+      <g id="tree">
+        <line 
+        stroke-width="10"
+        stroke="brown"
+        x1="350"
+        y1="250"
+        x2="350"
+        y2="100"/>
+        <path
+        fill="green"
+        stroke="green"
+        stroke-width="6"
+        d="M350,100 l50,70 M350,120 l50,70 M350,100 l-50,70 M350,120 l-50,70"/>
+      </g>
+     </svg>
+     <script src="app.js"></script>
+  </body>
+</html>
