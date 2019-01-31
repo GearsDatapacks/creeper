@@ -7,6 +7,7 @@ const head = document.getElementById('head');
 const heart1 = document.getElementById('health1');
 const heart2 = document.getElementById('health2');
 const heart3 = document.getElementById('health3');
+const slime = document.getElementById('slime');
 const heartBbox = heart1.getBBox();
 const characterWidth = character.getBBox().width;
 const characterHeight = character.getBBox().height;
@@ -14,6 +15,7 @@ let crouching = false;
 let facing = 'right';
 let x = window.innerWidth / 2;
 let y = 0;
+let slimeX = 0;
 
 function setOrigin (x) {
   character.setAttribute('transform-origin', x + characterWidth / 2,250 + y + characterHeight / 2)
@@ -136,6 +138,10 @@ function keyDown (event) {
     attack();
   }
   
+  else if (event.keyCode === 27) {
+    moveSlime();
+  }
+  
   else {
     return;
   }
@@ -159,7 +165,15 @@ function makeObjectVisible (object) {
 function attack () {
   character.setAttribute('attacking', '');
   body.setAttribute('d', 'M0,250 l20,-25 l20,25 l-20,-25 l0,-50 m-20,25 l20,-25 l30,0 l-30,0 m10,-15 q-7.5,10 -15 0 m0,-15 h3 m15,0 h-3');
+  character.removeAttribute('crouching');
+  head.setAttribute('cy', '155')
   //console.log('sucess', character.getAttribute('d'))
+}
+
+function moveSlime () {
+  let movePosition = Math.round(Math.random() * 200);
+  slimeX += movePosition
+  slime.setAttribute('transform', `translate(${slimeX},0)`);
 }
 
 moveGuy(0,0);
@@ -186,7 +200,7 @@ placeHearts(`a 20,20 0,0,1 40,0
       q -40,-30 -40,-60 z`);
 
 function stand () {
-  body.setAttribute('d', 'M0,250 l20,-25 l20,25 l-20,-25 l0,-50 m-20,25 l20,-25 l20,25 l-20,-25 m10,-15 q-7.5,10 -15 0 m0,-15 h3 m15,0 h-3');
+  body.setAttribute('d', 'M0,250 l20,-25 l20,25 l-20,-25 l0,-50 m-20,25 l20,-25 l20,25 l-20,-25 m9,-15 q-7.5,10 -15 0 m0,-15 h3 m15,0 h-3');
   head.setAttribute('cy', '155');
   crouching = false;
   character.removeAttribute('crouching');
@@ -198,12 +212,15 @@ function crouch () {
   head.setAttribute('cy', '185');
   crouching = true;
   character.setAttribute('crouching', '');
+  character.removeAttribute('attacking');
 }
 
 window.addEventListener('keydown', keyDown);
 
 window.addEventListener('keyup', keyUp);
 
+//return 13
+//escape 27
 //space 32
 //down arrow 40
 //right arrow 39

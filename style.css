@@ -14,7 +14,7 @@ svg {
   background-color: skyblue;
 }
 
-html[ready] {
+html[ready] * {
   transition: transform 50ms;
 }
 
