@@ -1,17 +1,13 @@
 const character = document.getElementById('character');
 const characterMove = document.getElementById('charout');
-const grass = document.getElementById('grass');
-const soil = document.getElementById('soil');
 const body = document.getElementById('body');
 const head = document.getElementById('head');
 const heart1 = document.getElementById('health1');
 const heart2 = document.getElementById('health2');
 const heart3 = document.getElementById('health3');
-const slime = document.getElementById('slime');
 const heartBbox = heart1.getBBox();
 const characterWidth = character.getBBox().width;
 const characterHeight = character.getBBox().height;
-const world = document.getElementById('world');
 const RETURN = 13;
 const ESCAPE = 27;
 const SPACE = 32;
@@ -24,18 +20,19 @@ const DATA_NORMAL = 'M0,0 l20,-25 l20,25 l-20,-25 l0,-50 m-20,25 l20,-25 l20,25 
 const DATA_ATTACK = 'M0,0 l20,-25 l20,25 l-20,-25 l0,-50 m-20,25 l20,-25 l30,0 l-30,0 m10,-15 q-7.5,10 -15 0 m0,-15 h3 m15,0 h-3';
 const DATA_CROUCH_ATTACK = 'M0,0 l20,-15 l20,15 l-20,-15 l0,-30 m-20,25 l20,-25 l30,0 l-30,0 m10,-15 q-7.5,10 -15 0 m0,-15 h3 m15,0 h-3';
 const DATA_CROUCH = 'M0,0 l20,-15 l20,15 l-20,-15 l0,-30 m-20,25 l20,-25 l20,25 l-20,-25 m10,-15 q-7.5,10 -15 0 m0,-15 h3 m15,0 h-3';
-const plants = document.querySelectorAll('[data-plant]');
 const svg = document.querySelector('svg');
+const world = document.getElementById('world');
+const defs = svg.querySelector('defs');
+const sceneTemplate = document.getElementById('scene');
 let crouching = false;
 let facing = 'right';
 let worldX = 0;
 let x = window.innerWidth / 2;
 let y = 250;
 let slimeX = 0;
-let plantColour;
-let skyColour;
-let soilColour;
-let current;
+let currentScene;
+let slime;
+let dagger;
 
 fetch('scenes.json', {
     headers: {
@@ -46,17 +43,45 @@ fetch('scenes.json', {
   .then(function (response) {
     return response.json();
   })
-  .then(onSuccess)
+  .then(onScenesLoaded)
   .catch(onError);
 
-function onSuccess (areas) {
-  console.log('areas', areas);
-  current = areas.normal;
-  plantColour = current.plants;
-  skyColour = current.sky;
-  soilColour = current.soil;
-  setState();
-}//590
+function onScenesLoaded (scenes) {
+  currentScene = scenes.normal;
+  
+  setupScene(currentScene);
+}
+
+function setupScene (scene) {
+  const plantColour = scene.plants;
+  const skyColour = scene.sky;
+  const soilColour = scene.soil;
+  
+  const sceneElem = sceneTemplate.cloneNode(true);
+  // Change ids
+  
+  slime = sceneElem.querySelector('#slime');
+  dagger = sceneElem.querySelector('#dagger');
+  
+  const plants = sceneElem.querySelectorAll('[data-plant]');
+  const grass = sceneElem.querySelector('#grass');
+  const soil = sceneElem.querySelector('#soil');
+  
+  world.appendChild(sceneElem);
+  
+  
+  for (let i = 0; i < plants.length; i++) {
+    console.log(plantColour);
+    plants[i].setAttribute('stroke', plantColour);
+  }
+  soil.setAttribute('width', window.innerWidth * 3);
+  soil.setAttribute('height', window.innerHeight);
+  soil.setAttribute('x', -window.innerWidth);
+  soil.setAttribute('fill', soilColour);
+  grass.setAttribute('x2', window.innerWidth * 2);
+  grass.setAttribute('x1', -window.innerWidth);
+  svg.style.backgroundColor = skyColour;
+}
 
 function onError (err) {
   console.error(err);
@@ -285,21 +310,6 @@ function placeHearts (callback) {
   heart1.setAttribute("d",`M${window.innerWidth + 80},20 ${callback}`);
   heart2.setAttribute("d",`M${window.innerWidth},20 ${callback}`);
   heart3.setAttribute("d",`M${window.innerWidth - 80},20 ${callback}`);
-} 
-
-function setState () {
-  console.log(plants.length);
-  for (let i = 0; i < plants.length; i++) {
-    console.log(plantColour);
-    plants[i].setAttribute('stroke', plantColour);
-  }
-  soil.setAttribute('width', window.innerWidth * 3);
-  soil.setAttribute('height', window.innerHeight);
-  soil.setAttribute('x', -window.innerWidth);
-  soil.setAttribute('fill', soilColour);
-  grass.setAttribute('x2', window.innerWidth * 2);
-  grass.setAttribute('x1', -window.innerWidth);
-  svg.style.backgroundColor = skyColour;
 }
 
 //l-15,-35 q7.5,-17.5 15,2.5 q7.5,-17.5 15,0 z
