@@ -1,0 +1,37 @@
+{
+  "normal": {
+    "plants":"green",
+    "soil":"#896108",
+    "sky":"skyblue"
+  },
+  "plain": {
+    "plants":"#ccaa28",
+    "soil":"#b9784b",
+    "sky":"#e5ba43"
+  },
+  "snow": {
+   "plants":"white",
+    "soil":"#896108",
+    "sky":"lightblue" 
+  },
+  "crimsonP lain": {
+    "plants":"darkred",
+    "soil":"brown",
+    "sky":"pink"
+  },
+  "indigoPlain": {
+    "plants":"darkblue",
+    "soil":"#fa0",
+    "sky":"skyblue"
+  },
+  "sevanah": {
+    "plants":"#aac328",
+    "soil":"#b9784b",
+    "sky":"#e5ba43"
+  },
+  "dessert": {
+    "plants":"gold",
+    "soil":"gold",
+    "sky":"#dd0"
+  }
+}
