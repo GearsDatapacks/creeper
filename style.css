@@ -21,20 +21,24 @@ path#cloud {
   animation: 5s linear infinite alternate blow;
 }
 
-g#dagger[down] {
+g#dagger[data-position="start"] {
   transform: translate(330px,115px) scale(0.1);
 }
 
-g#dagger[up] {
-  transform: translate(33px,-85px) scale(0.1);
+g#dagger[data-position="hold"] {
+  transform: translate(33px,-90px) scale(0.1);
 }
 
-g#character[crouching] > g#dagger {
-  transform: translate(33px,-60px) scale(0.1)
+g#character[data-crouching] > g#dagger {
+  transform: translate(33px,-60px) scale(0.1);
 }
 
-g#character[attacking] > g#dagger {
-  transform: translate(35px,-105px) scale(0.1)
+g#character[data-attacking] > g#dagger {
+  transform: translate(35px,-105px) scale(0.1);
+}
+
+g#character[data-crouch-attacking] > g#dagger {
+  transform: translate(85px,-55px) rotate(90deg) scale(0.1);
 }
 
 /*

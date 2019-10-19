@@ -30,13 +30,28 @@
           stroke="black"
           stroke-width="1"
           d="M200,100 q-5,-30 25,-35 q22.5,-25 45,0  q30,5 25,35 z"/>
-          <path
-          fill="seagreen"
-          opacity="0.7"
-          id="slime"
-          d="M200,250 l80,0 q-40,-80 -80,0"
-          />
-          <g id="dagger" down>
+          <g id="slime" transform="translate(200,0)">
+            <line 
+            x1="0"
+            x2="80"
+            y1="205"
+            y2="205"
+            stroke-width="3"
+            stroke="black"/>
+            <line
+            id="slimeHealth" 
+            x1="0"
+            y1="205"
+            y2="205"
+            stroke-width="3"
+            stroke="#00dd00"/>
+            <path
+            fill="seagreen"
+            opacity="0.7"
+            d="M0,250 l80,0 q-40,-80 -80,0"
+            />
+          </g>
+          <g id="dagger" data-position="start">
             <polygon style="fill:#666666;" points="166.112,272.432 191.782,246.762 165.807,220.787 140.137,246.457 109.578,215.897 
 	            86.353,239.122 173.446,326.215 196.671,302.991 	"/>
             <path style="fill:#D17519;" d="M109.719,262.488l-7.5,7.5l-59.87,59.86c-0.95,0.95-1.87,1.93-2.75,2.93
@@ -70,12 +85,18 @@
             d="M350,100 l50,70 M350,120 l50,70 M350,100 l-50,70 M350,120 l-50,70"/>
           </g>
         </g>
+        <clipPath id="heartsGone">
+          <rect
+          y="0"
+          height="80"
+          id="clipRect"/>
+        </clipPath>
       </defs>
       <g id="world">
       </g>
       <g id="chrome">
         <g id="charout">
-          <g id="character" opacity="0" facing="right">
+          <g id="character" opacity="0">
             <circle
             id="head" 
             r="20"
@@ -95,20 +116,41 @@
           </g>
         </g>
         <path
-        transform="scale(0.5)"
-        class="health"
-        id="health1"
-        fill="red"/>
-        <path
-        transform="scale(0.5)"
-        class="health"
-        id="health2"
-        fill="red"/>
-        <path
-        transform="scale(0.5)"
-        class="health"
-        id="health3"
-        fill="red"/>
+          class="health"
+          id="shadowHealth1"
+          fill="black"
+          transform="scale(0.5)"/>
+          <path
+          class="health"
+          id="shadowHealth2"
+          fill="black"
+          transform="scale(0.5)"/>
+          <path
+          class="health"
+          id="shadowHealth3"
+          fill="black"
+          transform="scale(0.5)"/>
+        <g transform="scale(0.5)" clip-path="url(#heartsGone)">
+          <path
+          class="health"
+          id="health1"
+          fill="red"/>
+          <path
+          class="health"
+          id="health2"
+          fill="red"/>
+          <path
+          class="health"
+          id="health3"
+          fill="red"/>
+        </g>
+      </g>
+      <g>
+        <rect
+        id="gameOver"
+        x="0"
+        y="0"/>
+        <text x="400" fill="red">GAME OVER</text>
       </g>
      </svg>
      <script src="app.js"></script>
