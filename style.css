@@ -51,3 +51,7 @@ g#dagger[updown] {
     transform: translate(500px,0);
   }
 }
+
+g#slime line {
+  stroke-linecap: round;
+}

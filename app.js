@@ -295,7 +295,7 @@ function detectCollision () {
     
     const slimeIsLeft = x > (slimeX + worldX);
     
-    moveSlime(slimeIsLeft ? 50 : -50);
+    moveSlime(slimeIsLeft ? -50 : 50);
   }
   
   else if (isTouching(character,slime)) {
@@ -438,8 +438,20 @@ function moveSlime (setSpeed) {
   detectCollision();
 }
 
+function setSlimeMove () {
+  moveSlime(10);
+  startSlimeMove();
+}
+
+function startSlimeMove () {
+  if (slimeHealth !== 0) {
+    setTimeout(setSlimeMove, 250);
+  }
+}
+
 moveGuy(0,0);
 makeObjectVisible(character);
+startSlimeMove();
 
 function placeHearts (callback) {
   heart1.setAttribute("d",`M${window.innerWidth + 80},20 ${callback}`);
